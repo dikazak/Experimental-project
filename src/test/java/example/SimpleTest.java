@@ -14,7 +14,7 @@ public class SimpleTest {
     @Test
     public void helloWorld() {
         LOGGER.warn("Hello, world!");
-        System.getenv().forEach((key, value) -> LOGGER.debug(key + ":" + "value"));
+        LOGGER.debug(System.getenv("BUILD NUMBER"));
         Assert.assertTrue(true);
     }
 
