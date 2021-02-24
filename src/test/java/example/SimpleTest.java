@@ -1,12 +1,14 @@
 package example;
 
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class SimpleTest {
 
+    @Test
     public void helloWorld() {
         System.out.println("Hello, world!");
-        Assertions.assertTrue(true);
+        Assert.assertTrue(true);
     }
 
 }
