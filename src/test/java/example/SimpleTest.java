@@ -13,8 +13,8 @@ public class SimpleTest {
 
     @Test
     public void helloWorld() {
-        System.out.println("Hello, world!");
-        System.getenv().forEach((key, value) -> LOGGER.debug(key + ":" + value));
+        LOGGER.warn("Hello, world!");
+        LOGGER.warn(System.getenv("BUILD_NUMBER"));
         Assert.assertTrue(true);
     }
 
