@@ -18,4 +18,10 @@ public class SimpleTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void failedTest() {
+        LOGGER.warn("Hello, world!");
+        Assert.assertTrue(false);
+    }
+
 }
