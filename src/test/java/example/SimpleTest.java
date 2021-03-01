@@ -15,6 +15,11 @@ public class SimpleTest {
     public void helloWorld() {
         LOGGER.warn("Hello, world!");
         LOGGER.debug(System.getenv("BUILD NUMBER"));
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertTrue(true);
     }
 
