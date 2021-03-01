@@ -15,11 +15,6 @@ public class SimpleTest {
     public void helloWorld() {
         LOGGER.warn("Hello, world!");
         LOGGER.debug(System.getenv("BUILD NUMBER"));
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assert.assertTrue(true);
     }
 
@@ -27,6 +22,13 @@ public class SimpleTest {
     public void failedTest() {
         LOGGER.warn("Hello, world!");
         Assert.assertTrue(false);
+    }
+
+    @Test
+    public void hardWorkingTest() {
+        for (int i = 0; i < 10_000_000; i++) {
+
+        }
     }
 
 }
