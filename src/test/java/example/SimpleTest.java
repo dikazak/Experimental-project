@@ -19,18 +19,18 @@ public class SimpleTest {
     }
 
     @Test
-    public void failedTest() {
-        LOGGER.warn("Hello, world!");
-        Assert.assertTrue(false);
-    }
-
-    @Test
     public void hardWorkingTest() {
         for (int i = 0; i < 1_000_000_000; i++) {
             for (int j = 0; j < 1000; j++) {
 
             }
         }
+    }
+
+    @Test
+    public void failedTest() {
+        LOGGER.warn("Hello, world!");
+        Assert.assertTrue(false);
     }
 
 }
