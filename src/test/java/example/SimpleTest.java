@@ -20,7 +20,7 @@ public class SimpleTest {
 
     @Test
     public void hardWorkingTest() {
-        for (int j = 0; j < 1_000_000; j++) {
+        for (int j = 0; j < 1_000_000_000; j++) {
             Math.pow(2.0, 5);
         }
         Assert.assertTrue(true);
