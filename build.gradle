@@ -20,7 +20,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     // TestNG
-    testImplementation 'com.zebrunner:agent-testng:1.3.0.169-SNAPSHOT'
+    testImplementation 'com.zebrunner:agent-testng:1.4.0'
     testImplementation 'org.testng:testng:7.3.0'
 
 }
