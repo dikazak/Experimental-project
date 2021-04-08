@@ -14,8 +14,7 @@ public class SimpleTest {
     @Test
     public void travis() {
         System.getenv()
-              .keySet()
-              .forEach(LOGGER::debug);
+              .forEach((key, value) -> LOGGER.warn(key + ":" + value));
     }
 
     @Test
