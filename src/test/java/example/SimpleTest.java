@@ -10,6 +10,13 @@ import java.lang.invoke.MethodHandles;
 public class SimpleTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    
+    @Test
+    public void travis() {
+        System.getenv()
+              .keySet()
+              .forEach(LOGGER::debug);
+    }
 
     @Test
     public void helloWorld() {
