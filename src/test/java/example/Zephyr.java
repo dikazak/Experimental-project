@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.lang.invoke.MethodHandles;
 
-public class SimpleTest {
+public class Zephyr {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -18,30 +18,30 @@ public class SimpleTest {
     @Test
     public void testCreateUser() {
         LOGGER.info("testCreateUser logs");
-        Label.attachToTest(testCaseKey, "DEV-T1");
-        Label.attachToTestRun(testCycleKey, "DEV-R1");
+        Label.attachToTest(testCaseKey, "QAP-T1");
+        Label.attachToTestRun(testCycleKey, "QAP-R1");
         throw new RuntimeException();
     }
 
     @Test
     public void testCreateUserMissingSomeFields() {
         LOGGER.info("testCreateUserMissingSomeFields logs");
-        Label.attachToTest(testCaseKey, "DEV-T2");
-        Label.attachToTestRun(testCycleKey, "DEV-R1");
+        Label.attachToTest(testCaseKey, "QAP-T2");
+        Label.attachToTestRun(testCycleKey, "QAP-R1");
     }
 
     @Test
     public void testGetUsers() {
         LOGGER.info("testGetUsers logs");
-        Label.attachToTest(testCaseKey, "DEV-T3");
-        Label.attachToTestRun(testCycleKey, "DEV-R1");
+        Label.attachToTest(testCaseKey, "QAP-T3");
+        Label.attachToTestRun(testCycleKey, "QAP-R1");
     }
 
     @Test
     public void testDeleteUsers() {
         LOGGER.info("testGetUsers logs");
-        Label.attachToTest(testCaseKey, "DEV-T4");
-        Label.attachToTestRun(testCycleKey, "DEV-R1");
+        Label.attachToTest(testCaseKey, "QAP-T4");
+        Label.attachToTestRun(testCycleKey, "QAP-R1");
     }
 
 }
