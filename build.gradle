@@ -6,6 +6,7 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
+//    mavenLocal()
     mavenCentral()
     maven {
         url "https://nexus.zebrunner.dev/repository/ce-snapshots/"
@@ -19,13 +20,19 @@ dependencies {
     implementation 'ch.qos.logback:logback-core:1.2.3'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
+    // SELENIUM
+    testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    testImplementation 'net.bytebuddy:byte-buddy:1.10.18'
+
     // TestNG
-    testImplementation 'com.zebrunner:agent-testng:1.6.1'
+    testImplementation 'com.zebrunner:agent-testng:1.6.4'
     testImplementation 'org.testng:testng:7.4.0'
 
 }
 
 test {
+//    systemProperty "ci_run_id", "60806048-b197-40a3-bf6b-33a7ac56774f"
+//    systemProperty "rerun_failures", "true"
     def coreAgentArtifact = configurations.testRuntimeClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'agent-core' }
     test.doFirst {
         jvmArgs "-javaagent:${coreAgentArtifact.file}"
