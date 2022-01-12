@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class MultipleSessionsTest {
+public class MultipleSessionsSample {
 
     private final static String SELENIUM_URL = "https://edovnar:Up23PW80wAJ8aMLI@engine.zebrunner.dev/wd/hub";
 

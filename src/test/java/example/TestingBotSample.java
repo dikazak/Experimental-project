@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class TestingBotTest {
+public class TestingBotSample {
 
     public static final String KEY = "0994d4b523acb6f85961109513e8c38a";
     public static final String SECRET = "2b8aadff504ac09075375a97d66f80ae";
