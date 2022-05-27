@@ -6,6 +6,8 @@ pipeline {
         stage('Initialization') {
             steps {
                 slackSend(color: '#4eade9', message: "Slack practice: deploy started")
+                env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
             }
         }
     }
@@ -15,8 +17,6 @@ pipeline {
             slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.")
         }
         failure {
-            env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
-            env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
             slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. ${GIT_COMMIT_MSG} : ${GIT_AUTHOR}")
         }
     }
