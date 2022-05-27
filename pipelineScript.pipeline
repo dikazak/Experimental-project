@@ -12,19 +12,22 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
-                    env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                    env.GIT_COMMITS_MSG_AND_AUTHOR = sh (script: 'git log --pretty="%s %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
                 }
             }
         }
     }
 
     post {
+
         success {
-            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success. ${GIT_COMMIT_MSG} : ${GIT_AUTHOR}")
+            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.\n${GIT_COMMITS_MSG_AND_AUTHOR}")
         }
         failure {
-            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. ${GIT_COMMIT_MSG} : ${GIT_AUTHOR}")
+            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>.\n${GIT_COMMITS_MSG_AND_AUTHOR}")
+        }
+        always {
+            echo sh(script: 'env|sort', returnStdout: true)
         }
     }
 }
