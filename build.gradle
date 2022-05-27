@@ -6,7 +6,7 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
-//    mavenLocal()
+    mavenLocal()
     mavenCentral()
     maven {
         url "https://nexus.zebrunner.dev/repository/ce-snapshots/"
@@ -16,18 +16,21 @@ repositories {
 dependencies {
 
     // LOGGING
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'ch.qos.logback:logback-core:1.2.3'
-    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+
     implementation 'commons-codec:commons-codec:1.15'
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    implementation 'com.konghq:unirest-java:3.13.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 
     // SELENIUM
     testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     testImplementation 'net.bytebuddy:byte-buddy:1.10.18'
 
     // TestNG
-    testImplementation 'com.zebrunner:agent-testng:1.6.4'
+    testImplementation 'com.zebrunner:agent-testng:1.0-SNAPSHOT'
     testImplementation 'org.testng:testng:7.4.0'
 
 }
