@@ -30,9 +30,11 @@ pipeline {
 
     post {
         success {
+            echo sh(script: 'env|sort', returnStdout: true)
             slackSend(color: '#44c480', message: "Slack practice. deploy finished: success")
         }
         failure {
+            echo sh(script: 'env|sort', returnStdout: true)
             slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>")
         }
     }
