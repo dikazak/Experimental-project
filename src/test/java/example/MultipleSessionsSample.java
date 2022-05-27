@@ -1,6 +1,5 @@
 package example;
 
-import com.zebrunner.agent.core.annotation.Priority;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
