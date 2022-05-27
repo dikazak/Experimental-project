@@ -48,7 +48,7 @@ pipeline {
             slackSend(color: '#44c480', message: "Slack practice. deploy finished: success. ESCAPED_DIFF: ${ESCAPED_DIFF}. COMMIT: ${COMMIT}. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
         }
         failure {
-            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. COMMIT: ${COMMIT}. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
+            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
         }
     }
 }
