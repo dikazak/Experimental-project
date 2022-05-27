@@ -1,28 +1,27 @@
 pipeline {
     agent any
 
-    environment {
-        ARTIFACT = "Experimental-project"
-
-        SCM_REPO_URL = "https://github.com/dikazak/Experimental-project.git"
-    }
-
     stages {
 
         stage('Initialization') {
             steps {
-                script {
-                    currentBuild.displayName = "Build"
-                }
                 slackSend(color: '#4eade9', message: "Slack practice: deploy started")
             }
         }
 
-        stage('Repository checkout') {
-            steps {
-                git branch: "${BRANCH}", credentialsId: "${SCM_CREDENTIALS_ID}", url: "${SCM_REPO_URL}"
-            }
-        }
+      stage("last-changes") {
+        def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
+              publisher.publishLastChanges()
+              def changes = publisher.getLastChanges()
+              println(changes.getEscapedDiff())
+              for (commit in changes.getCommits()) {
+                  println(commit)
+                  def commitInfo = commit.getCommitInfo()
+                  println(commitInfo)
+                  println(commitInfo.getCommitMessage())
+                  println(commit.getChanges())
+              }
+      }
     }
 
     post {
@@ -30,7 +29,6 @@ pipeline {
             slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.")
         }
         failure {
-            echo sh(script: 'env|sort', returnStdout: true)
             slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>.")
         }
     }
