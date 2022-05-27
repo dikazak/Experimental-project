@@ -24,31 +24,12 @@ pipeline {
             }
         }
 
-        stage("send diff") {
-            steps {
-                script {
-                    def publisher = LastChanges.getLastChangesPublisher null, "SIDE", "LINE", true, true, "", "", "", "", ""
-                    publisher.publishLastChanges()
-                    def changes = publisher.getLastChanges()
-                    env.ESCAPED_DIFF = changes.getEscapedDiff()
-                    for (commit in changes.getCommits()) {
-                        env.COMMIT = commit
-                        def commitInfo = commit.getCommitInfo()
-                        env.COMMIT_INFO = commitInfo
-                        env.COMMIT_MESSAGE = commitInfo.getCommitMessage()
-                        env.COMMIT_CHANGES = commit.getChanges()
-                    }
-               }
-            }
-        }
-    }
-
     post {
         success {
-            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success. ESCAPED_DIFF: ${ESCAPED_DIFF}. COMMIT: ${COMMIT}. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
+            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.")
         }
         failure {
-            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
+            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>.")
         }
     }
 }
