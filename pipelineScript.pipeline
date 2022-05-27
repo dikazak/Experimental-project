@@ -14,9 +14,7 @@ pipeline {
                 script {
                     currentBuild.displayName = "Build"
                 }
-                wrap([$class: 'BuildUser']) {
-                    slackSend(color: '#4eade9', message: "Slack practice: deploy started")
-                }
+                slackSend(color: '#4eade9', message: "Slack practice: deploy started")
             }
         }
 
@@ -47,12 +45,36 @@ pipeline {
 
     post {
         success {
-            echo sh(script: 'env|sort', returnStdout: true)
-            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success")
+            script {
+                    def publisher = LastChanges.getLastChangesPublisher null, "SIDE", "LINE", true, true, "", "", "", "", ""
+                    publisher.publishLastChanges()
+                    def changes = publisher.getLastChanges()
+                    env.ESCAPED_DIFF = changes.getEscapedDiff()
+                    for (commit in changes.getCommits()) {
+                        env.COMMIT = commit
+                        def commitInfo = commit.getCommitInfo()
+                        env.COMMIT_INFO = commitInfo
+                        env.COMMIT_MESSAGE = commitInfo.getCommitMessage()
+                        env.COMMIT_CHANGES = commit.getChanges()
+                        slackSend(color: '#44c480', message: "Slack practice. deploy finished: success. ESCAPED_DIFF: ${ESCAPED_DIFF}. COMMIT: ${COMMIT}. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
+                    }
+               }
         }
         failure {
-            echo sh(script: 'env|sort', returnStdout: true)
-            slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>")
+            script {
+                    def publisher = LastChanges.getLastChangesPublisher null, "SIDE", "LINE", true, true, "", "", "", "", ""
+                    publisher.publishLastChanges()
+                    def changes = publisher.getLastChanges()
+                    env.ESCAPED_DIFF = changes.getEscapedDiff()
+                    for (commit in changes.getCommits()) {
+                        env.COMMIT = commit
+                        def commitInfo = commit.getCommitInfo()
+                        env.COMMIT_INFO = commitInfo
+                        env.COMMIT_MESSAGE = commitInfo.getCommitMessage()
+                        env.COMMIT_CHANGES = commit.getChanges()
+                        slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. ESCAPED_DIFF: ${ESCAPED_DIFF}. COMMIT: ${COMMIT}. COMMIT_INFO: ${COMMIT_INFO}. COMMIT_MESSAGE: ${COMMIT_MESSAGE}. COMMIT_CHANGES: ${COMMIT_CHANGES}")
+                    }
+               }
         }
     }
 }
