@@ -32,13 +32,13 @@ pipeline {
                     def publisher = LastChanges.getLastChangesPublisher null, "SIDE", "LINE", true, true, "", "", "", "", ""
                     publisher.publishLastChanges()
                     def changes = publisher.getLastChanges()
-                    println(changes.getEscapedDiff())
+                    echo changes.getEscapedDiff()
                     for (commit in changes.getCommits()) {
-                        println(commit)
+                        echo commit
                         def commitInfo = commit.getCommitInfo()
-                        println(commitInfo)
-                        println(commitInfo.getCommitMessage())
-                        println(commit.getChanges())
+                        echo commitInfo
+                        echo commitInfo.getCommitMessage()
+                        echo commit.getChanges()
                     }
                }
             }
