@@ -21,7 +21,7 @@ pipeline {
 
     post {
         success {
-            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.")
+            slackSend(color: '#44c480', message: "Slack practice. deploy finished: success. ${GIT_COMMIT_MSG} : ${GIT_AUTHOR}")
         }
         failure {
             slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>. ${GIT_COMMIT_MSG} : ${GIT_AUTHOR}")
