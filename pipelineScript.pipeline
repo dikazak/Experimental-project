@@ -5,6 +5,7 @@ pipeline {
 
         stage('Initialization') {
             steps {
+                echo sh(script: 'env|sort', returnStdout: true)
                 script {
                     if (env.GIT_COMMIT && env.GIT_PREVIOUS_SUCCESSFUL_COMMIT) {
                         env.GIT_COMMITS_MSG = sh (script: 'git log --pretty="%s - %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
@@ -23,8 +24,6 @@ pipeline {
         failure {
             slackSend(color: '#de5b62', message: "Slack practice. deploy finished: <${currentBuild.absoluteUrl}console|failure>.")
         }
-        always {
-            echo sh(script: 'env|sort', returnStdout: true)
-        }
+
     }
 }
