@@ -6,11 +6,9 @@ pipeline {
         stage('Initialization') {
 
             steps {
-                git branch: "master", url: "https://github.com/dikazak/git-practice.git"
-                sh 'git log --pretty="%s - %cn" -5'
-                sh "env|sort"
+                def remoteBranch = git branch: "master", url: "https://github.com/dikazak/git-practice.git"
                 script {
-                    if (env.GIT_COMMIT && env.GIT_PREVIOUS_SUCCESSFUL_COMMIT) {
+                    if (remoteBranch.GIT_COMMIT && remoteBranch.GIT_PREVIOUS_SUCCESSFUL_COMMIT) {
                         env.GIT_COMMITS_MSG = sh (script: 'git log --pretty="%s - %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
                     }
                 }
