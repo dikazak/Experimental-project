@@ -8,7 +8,7 @@ pipeline {
                 script {
                     def remoteBranch = git branch: "master", url: "https://github.com/dikazak/git-practice.git"
                     if (remoteBranch.GIT_COMMIT && remoteBranch.GIT_PREVIOUS_SUCCESSFUL_COMMIT) {
-                        env.GIT_COMMITS_MSG = sh (script: 'git log --pretty="%s - %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
+                        env.GIT_COMMITS_MSG = sh (script: 'git log --pretty="%s - %cn" ${remoteBranch.GIT_COMMIT} ^${remoteBranch.GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
                     }
                 }
                 slackSend(color: '#4eade9', message: "Slack practice: deploy started\n${env.GIT_COMMITS_MSG ?: ""}")
