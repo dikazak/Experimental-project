@@ -8,7 +8,7 @@ pipeline {
                 script {
                     env.GIT_COMMITS_MSG_AND_AUTHOR = sh (script: 'git log --pretty="%s - %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
                 }
-                slackSend(color: '#4eade9', message: "Slack practice: deploy started\n${GIT_COMMITS_MSG_AND_AUTHOR:}")
+                slackSend(color: '#4eade9', message: "Slack practice: deploy started\n${GIT_COMMITS_MSG_AND_AUTHOR}")
             }
         }
     }
