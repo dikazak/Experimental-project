@@ -12,13 +12,14 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    env.GIT_COMMITS_MSG_AND_AUTHOR = sh (script: 'git log --pretty="%s %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
+                    env.GIT_COMMITS_MSG_AND_AUTHOR = sh (script: 'git log --pretty="%s - %cn" ${GIT_COMMIT} ^${GIT_PREVIOUS_SUCCESSFUL_COMMIT}', returnStdout: true)
                 }
             }
         }
     }
 
     post {
+
         success {
             slackSend(color: '#44c480', message: "Slack practice. deploy finished: success.\n${GIT_COMMITS_MSG_AND_AUTHOR}")
         }
