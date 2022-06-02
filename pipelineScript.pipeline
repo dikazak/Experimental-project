@@ -6,7 +6,7 @@ pipeline {
         stage('Initialization') {
             steps {
                 script {
-                    def remoteBranch = git branch: "master", url: "https://github.com/dikazak/git-practice.git"
+                    def remoteBranch = git branch: "main", url: "https://github.com/dikazak/git-practice.git"
                     env.TARGET_BRANCH_GIT_COMMIT = remoteBranch.GIT_COMMIT
                     env.PREVIOUS_SUCCESSFUL_BUILD_TARGET_BRANCH_COMMIT = remoteBranch.GIT_PREVIOUS_SUCCESSFUL_COMMIT
                     if (env.TARGET_BRANCH_GIT_COMMIT && env.PREVIOUS_SUCCESSFUL_BUILD_TARGET_BRANCH_COMMIT) {
