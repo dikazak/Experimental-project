@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Sample suite" >
+	<test name="Factory sample">
+		<classes>
+			<class name="example.testng.FactorySample" />
+		</classes>
+	</test>
+</suite>

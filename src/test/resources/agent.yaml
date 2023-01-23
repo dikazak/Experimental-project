@@ -1,0 +1,46 @@
+reporting:
+  enabled: true
+  project-key: DEF
+  server:
+    hostname: https://dkazaktest.zebrunner.org
+    access-token: RdXBD2VsOPpZjXKTIxDO24Ih2GpZVPYmjAfDMIyyiXdjXWiWpk
+  run:
+    environment: production
+    build: 3.1.1.912-SNAPSHOT
+    treat-skips-as-failures: true
+    substitute-remote-web-drivers: false
+#    context: "{\"mode\":\"RERUN\",\"testRunUuid\":\"18df9d5a-a47f-bc88-4ade-2ccda98272fb\", \"rerunCriteria\": {\"anyOfStatuses\": [\"FAILED\"]}}"
+#  tcm:
+#    test-case-status:
+#      on-pass: PASSED
+#      on-fail: FAILED
+#      on-skip: SKIPPED
+#    zebrunner:
+#      push-results: true
+#      push-in-real-time: false
+#      test-run-id: 10
+#    test-rail:
+#      push-results: true
+#      push-in-real-time: true
+#      suite-id: 2
+#      run-id: 689
+#      include-all-test-cases-in-new-run: true
+#      run-name: pisos
+#      milestone-name: testMilestone
+#      assignee: Dima
+#    xray:
+#      push-results: true
+#      push-in-real-time: true
+#      execution-key: QT-1
+#    zephyr:
+#      push-results: true
+#      push-in-real-time: true
+#      jira-project-key: QT
+#      test-cycle-key: Hello World
+#  milestone:
+#    id: 1
+#    name: DimaTest
+#  notification:
+#    enabled: false
+#    notify-on-each-failure: true
+#    slack-channels: qatests

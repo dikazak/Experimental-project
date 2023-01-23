@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Sample suite" >
+	<test name="Hello world sample">
+		<classes>
+			<class name="example.testng.HelloWorldSample" />
+		</classes>
+	</test>
+	<test name="Xray sample">
+		<classes>
+			<class name="example.testng.XraySample" />
+		</classes>
+	</test>
+</suite>
