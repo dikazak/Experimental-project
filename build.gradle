@@ -5,6 +5,12 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -15,28 +21,29 @@ repositories {
 
 dependencies {
 
-    // LOGGING
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
 
-    implementation 'commons-codec:commons-codec:1.15'
-    implementation 'javax.xml.bind:jaxb-api:2.3.0'
-    implementation 'com.konghq:unirest-java:3.13.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.2'
 
-    // SELENIUM
-    testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
-    testImplementation 'net.bytebuddy:byte-buddy:1.10.18'
+    testImplementation 'io.netty:netty-transport-native-epoll:4.1.87.Final'
+    testImplementation 'io.netty:netty-transport-native-kqueue:4.1.87.Final'
 
-    // TestNG
-    testImplementation 'com.zebrunner:agent-testng:1.0-SNAPSHOT'
-    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'net.bytebuddy:byte-buddy:1.12.10'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.4.0'
 
+    testImplementation 'org.testng:testng:7.7.1'
+    testImplementation 'com.zebrunner:agent-core:1.9.3.365-SNAPSHOT'
+    testImplementation 'com.zebrunner:agent-testng:1.9.2'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 test {
-//    systemProperty "ci_run_id", "60806048-b197-40a3-bf6b-33a7ac56774f"
+//    systemProperty "ci_run_id", "ac7e285b-1025-4878-b3d0-96ebec617663"
 //    systemProperty "rerun_failures", "true"
     def coreAgentArtifact = configurations.testRuntimeClasspath.resolvedConfiguration.resolvedArtifacts.find { it.name == 'agent-core' }
     test.doFirst {
