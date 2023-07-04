@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Sample suite" >
+	<groups>
+		<run>
+			<include name="G2"/>
+		</run>
+	</groups>
+	<test name="Group Sample 1">
+		<classes>
+			<class name="example.testng.GroupSample" />
+		</classes>
+	</test>
+	<test name="Group Sample 2">
+		<classes>
+			<class name="example.testng.GroupSample2" />
+		</classes>
+	</test>
+</suite>

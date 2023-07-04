@@ -4,12 +4,16 @@
 		<property name="pattern">[%d{HH:mm:ss}] %-5p (%F:%L) - %m%n</property>
 	</properties>
 	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}" />
+		</Console>
 		<ReportingAppender name="ReportingAppender">
 			<PatternLayout pattern="${pattern}" />
 		</ReportingAppender>
 	</appenders>
 	<loggers>
-		<root level="info">
+		<root level="debug">
+			<appender-ref ref="Console"/>
 			<appender-ref ref="ReportingAppender"/>
 		</root>
 	</loggers>

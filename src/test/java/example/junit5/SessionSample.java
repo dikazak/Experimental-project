@@ -1,47 +1,43 @@
-package example;
+package example.junit5;
 
 import com.zebrunner.agent.core.registrar.Artifact;
 import com.zebrunner.agent.core.registrar.Screenshot;
+import com.zebrunner.agent.core.webdriver.CapabilitiesCustomizer;
+import com.zebrunner.agent.core.webdriver.ZebrunnerCapabilitiesCustomizer;
 import example.utils.FileUtils;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
-public class SessionSample {
+class SessionSample {
 
     private static final Logger log = LoggerFactory.getLogger(SessionSample.class);
 
-    private static final String SELENIUM_URL = "https://dkazak322:mgPmd2LYthWBBiZbmp5XU1Qm9iVSjg2tv845WOcmR4L4TJRtmh@hub.lambdatest.com/wd/hub";
+    private static final String SELENIUM_URL = "https://dkazaktest:FsvKisRFwOl1@engine.zebrunner.dev/wd/hub";
+//    private static final String SELENIUM_URL = "https://zebrunnerdevelop_3mS9Wv:HpXc3y5GqSvxdx9jFBot@hub-cloud.browserstack.com/wd/hub";
 
-    private static final String IMAGE_PATH = "src/test/resources/Circle-icons-computer.svg.png";
+    private static final String IMAGE_PATH = "src/test/resources/Circle-icons-computer.png";
 
-    private RemoteWebDriver driver;
-
-    private static final Map<String, String> COMMON_CAPABILITIES = Map.of(
-            "platformName", "MacOS Big sur",
-            "browserName", "chrome",
-            "browserVersion", "107.0"
+    private static final Map<String, Object> COMMON_CAPABILITIES = Map.of(
+            "enableLog", true,
+            "enableVideo", true,
+            "enableVNC", true
+//            "provider", "BROWSERSTACK"
     );
 
     // bs:options
-    private static final Map<String, String> BROWSERSTACK_OPTIONS = Map.of(
-            "os", "OS X",
-            "osVersion", "Big Sur"
-    );
+    private static final Map<String, String> BROWSERSTACK_OPTIONS = Map.of();
 
     // lt:options
-    private static final Map<String, String> LAMBDATEST_OPTIONS = Map.of(
-
-    );
+    private static final Map<String, String> LAMBDATEST_OPTIONS = Map.of();
 
     // sauce:options
     private static final Map<String, String> SAUCELABS_OPTIONS = Map.of();
@@ -49,32 +45,24 @@ public class SessionSample {
     // tb:options
     private static final Map<String, String> TESTING_BOT_OPTIONS = Map.of();
 
-    @BeforeMethod
-    void beforeMethod() {
-        log.info("Before method");
-    }
+    private RemoteWebDriver driver;
 
     @Test
     void sessionTest() throws Exception {
-        String zebrunnerCapabilities = System.getenv("ZEBRUNNER_CAPABILITIES");
-        log.info("zebrunnerCapabilities: {}", zebrunnerCapabilities);
+        RemoteWebDriver driver = getDriver();
 
-        RemoteWebDriver driver = getDriver(SELENIUM_URL);
         this.doDriverWork(driver);
+
+        driver.quit();
     }
 
-    private RemoteWebDriver getDriver(String seleniumUrl) throws MalformedURLException {
+    private RemoteWebDriver getDriver() throws MalformedURLException {
+        URL url = new URL(SELENIUM_URL);
         MutableCapabilities capabilities = new MutableCapabilities();
-//        COMMON_CAPABILITIES.forEach(capabilities::setCapability);
 
-//        capabilities.setCapability("bstack:options", BROWSERSTACK_OPTIONS);
+        COMMON_CAPABILITIES.forEach(capabilities::setCapability);
 
-        this.driver = new RemoteWebDriver(new URL(seleniumUrl), capabilities);
-
-        this.driver.manage().window().maximize();
-        this.driver.manage().deleteAllCookies();
-
-        return driver;
+        return new RemoteWebDriver(url, capabilities);
     }
 
     private void doDriverWork(RemoteWebDriver driver) {
@@ -96,13 +84,9 @@ public class SessionSample {
                 actions.moveByOffset(100, 100);
                 i++;
             }
+            Thread.sleep(20 * 1000);
         } catch (Exception ignored) {
         }
-    }
-
-    @AfterTest
-    public void finish() {
-        this.driver.quit();
     }
 
 }

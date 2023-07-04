@@ -1,5 +1,7 @@
 package example.utils;
 
+import lombok.SneakyThrows;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,7 +9,8 @@ import java.util.Random;
 
 public class FileUtils {
 
-    public static byte[] fromFile(String fileName) throws IOException {
+    @SneakyThrows
+    public static byte[] fromFile(String fileName) {
         return new FileInputStream(fileName).readAllBytes();
     }
 
